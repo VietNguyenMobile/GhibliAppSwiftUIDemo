@@ -11,6 +11,8 @@ import Observation
 
 @Observable
 class FilmsViewModel {
+    
+    var films: [Film] = []
 
 //    var state: LoadingState<[Film]> = .idle
 //    
@@ -20,7 +22,18 @@ class FilmsViewModel {
 //        self.service = service
 //    }
 //    
-//    func fetch() async {
+    func fetch() async {
+        
+        let url = URL(string: "https://ghibliapi.vercel.app/films")!
+        
+        do {
+            let (data, response) = try await URLSession.shared.data(from: url)
+            
+            films = try JSONDecoder().decode([Film].self, from: data)
+        } catch {
+            print(error)
+        }
+        
 //        guard !state.isLoading || state.error != nil else { return }
 //        
 //        state = .loading
@@ -33,7 +46,7 @@ class FilmsViewModel {
 //        } catch {
 //            self.state = .error("unknown error")
 //        }
-//    }
+    }
 //    
 //    
 //// MARK: - Preview

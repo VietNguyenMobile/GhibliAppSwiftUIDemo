@@ -10,22 +10,30 @@ import SwiftUI
 
 struct FilmListView: View {
     
-    var films: [Film]
+//    var films: [Film]
+    @State private var filmsViewModel = FilmsViewModel()
 //    let favoritesViewModel: FavoritesViewModel
     
     var body: some View {
         
-        List(films) { film in
-            NavigationLink(value: film) {
-//               FilmRow(film: film,
-//                       favoritesViewModel: favoritesViewModel)
-            }
-            
+        List(filmsViewModel.films) {
+            Text($0.title)
+        }.task {
+            await filmsViewModel.fetch()
         }
-        .navigationDestination(for: Film.self) { film in
-//            FilmDetailScreen(film: film,
-//                             favoritesViewModel: favoritesViewModel)
-        }
+        
+//        List(films) { film in
+//            NavigationLink(value: film) {
+////               FilmRow(film: film,
+////                       favoritesViewModel: favoritesViewModel)
+//            }
+//            
+//        }
+//        .navigationDestination(for: Film.self) { film in
+////            FilmDetailScreen(film: film,
+////                             favoritesViewModel: favoritesViewModel)
+//        }
+        
         
     }
 }
@@ -75,7 +83,7 @@ struct FilmListView: View {
 //    
 //    NavigationStack {
 //        FilmListView(films: [Film.example, Film.exampleFavorite],
-//                     favoritesViewModel: favorites)
+//                     fa    FilmListView()ViewModel: favorites)
 //    }
 //    .task {
 //        favorites.load()
@@ -83,3 +91,7 @@ struct FilmListView: View {
 //}
 //
 //
+
+#Preview {
+    FilmListView()
+}
