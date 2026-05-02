@@ -15,11 +15,29 @@ struct FilmListView: View {
 //    let favoritesViewModel: FavoritesViewModel
     
     var body: some View {
-        
-        List(filmsViewModel.films) {
-            Text($0.title)
+        NavigationStack {
+            switch filmsViewModel.state {
+                case .idle:
+                    Text("No Films yet")
+                    
+            case .loading:
+                ProgressView {
+                    Text("Loading Films...")
+                }
+                case .loaded(let films):
+                List(films) {
+                    Text($0.title)
+                }
+                case .error(let error):
+                    Text("Error: \(error)")
+                        .foregroundColor(.red)
+                    
+                }
         }.task {
             await filmsViewModel.fetch()
+        }
+        
+        
         }
         
 //        List(films) { film in
@@ -35,7 +53,7 @@ struct FilmListView: View {
 //        }
         
         
-    }
+    
 }
 //
 //private struct FilmRow: View {

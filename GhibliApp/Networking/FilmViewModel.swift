@@ -12,40 +12,40 @@ import Observation
 @Observable
 class FilmsViewModel {
     
-    var films: [Film] = []
+//    var films: [Film] = []
 
-//    var state: LoadingState<[Film]> = .idle
-//    
-//    private let service: GhibliService
-//    
-//    init(service: GhibliService = DefaultGhibliService()) {
-//        self.service = service
-//    }
-//    
+    var state: LoadingState<[Film]> = .idle
+    
+    private let service: GhibliService
+    
+    init(service: GhibliService = DefaultGhibliService()) {
+        self.service = service
+    }
+    
     func fetch() async {
         
-        let url = URL(string: "https://ghibliapi.vercel.app/films")!
+//        let url = URL(string: "https://ghibliapi.vercel.app/films")!
         
-        do {
-            let (data, response) = try await URLSession.shared.data(from: url)
-            
-            films = try JSONDecoder().decode([Film].self, from: data)
-        } catch {
-            print(error)
-        }
-        
-//        guard !state.isLoading || state.error != nil else { return }
-//        
-//        state = .loading
-//        
 //        do {
-//            let films = try await service.fetchFilms()
-//            self.state = .loaded(films)
-//        } catch let error as APIError {
-//            self.state = .error(error.errorDescription ?? "unknown error")
+//            let (data, response) = try await URLSession.shared.data(from: url)
+//            
+//            films = try JSONDecoder().decode([Film].self, from: data)
 //        } catch {
-//            self.state = .error("unknown error")
+//            print(error)
 //        }
+        
+        guard !state.isLoading || state.error != nil else { return }
+//        
+        state = .loading
+//        
+        do {
+            let films = try await service.fetchFilms()
+            self.state = .loaded(films)
+        } catch let error as APIError {
+            self.state = .error(error.errorDescription ?? "unknown error")
+        } catch {
+            self.state = .error("unknown error")
+        }
     }
 //    
 //    
