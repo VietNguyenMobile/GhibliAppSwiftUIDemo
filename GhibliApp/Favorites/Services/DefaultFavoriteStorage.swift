@@ -14,7 +14,7 @@ struct DefaultFavoriteStorage: FavoriteStorage {
     
     func load() -> Set<String> {
         let array = UserDefaults.standard.stringArray(forKey: favoritesKey) ?? []
-         return Set(array)
+        return Set(array)
     }
     
     func save(favoriteIDs: Set<String>) {

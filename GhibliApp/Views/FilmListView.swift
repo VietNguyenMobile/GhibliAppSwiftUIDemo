@@ -92,8 +92,8 @@ private struct FilmRow: View {
                         .bold()
                     
                     Spacer()
-//                    FavoriteButton(filmID: film.id,
-//                                   favoritesViewModel: favoritesViewModel)
+                    FavoriteButton(filmID: film.id,
+                                   favoritesViewModel: favoritesViewModel)
                     .buttonStyle(.plain)
                     .controlSize(.large)
                 }
@@ -135,15 +135,17 @@ private struct FilmRow: View {
 
 
 #Preview {
-//    FilmListView()
+    //    FilmListView()
     
-    @State @Previewable var favorites = FavoritesViewModel(service: MockFavoriteStorage())
+    @State @Previewable var favorites = FavoritesViewModel(
+        service: MockFavoriteStorage()
+    )
         
-        NavigationStack {
-            FilmListView(films: [Film.example, Film.exampleFavorite],
-                         favoritesViewModel: favorites)
-        }
-        .task {
-//            favorites.load()
-        }
+    NavigationStack {
+        FilmListView(films: [Film.example, Film.exampleFavorite],
+                     favoritesViewModel: favorites)
+    }
+    .task {
+        favorites.load()
+    }
 }

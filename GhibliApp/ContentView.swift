@@ -33,7 +33,7 @@ struct ContentView: View {
             }
         }
         .task {
-//            favoritesViewModel.load()
+            favoritesViewModel.load()
             await filmsViewModel.fetch()
         }
 //        .setAppearanceTheme()
