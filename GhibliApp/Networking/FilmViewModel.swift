@@ -50,11 +50,11 @@ class FilmsViewModel {
 //    
 //    
 // MARK: - Preview
-//    
-//    static var example: FilmsViewModel {
-//        let vm = FilmsViewModel(service: MockGhibliService())
-//        vm.state = .loaded([Film.example, Film.exampleFavorite])
-//        return vm
-//    }
+    
+    static var example: FilmsViewModel {
+        let vm = FilmsViewModel(service: MockGhibliService())
+        vm.state = .loaded([Film.example, Film.exampleFavorite])
+        return vm
+    }
 
 }
