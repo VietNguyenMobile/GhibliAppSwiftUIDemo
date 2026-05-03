@@ -17,7 +17,7 @@ struct FilmDetailScreen: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 7) {
+            VStack(alignment: .leading, spacing: 17) {
                 
                 FilmImageView(urlPath: film.bannerImage)
                     .frame(height: 300)
@@ -52,8 +52,8 @@ struct FilmDetailScreen: View {
             }
         }
         .toolbar {
-//            FavoriteButton(filmID: film.id,
-//                           favoritesViewModel: favoritesViewModel)
+            FavoriteButton(filmID: film.id,
+                           favoritesViewModel: favoritesViewModel)
         }
         .task(id: film) {
             await viewModel.fetch(for: film)
@@ -120,7 +120,12 @@ fileprivate struct CharacterSectionView:  View {
                             .foregroundStyle(.pink)
                 }
             }
+//            .padding()
+//            .background(.blue.opacity(0.1))
+//            .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
         }
+//        .background(Color.blue.opacity(0.5))
+//        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
     }
 }
 
