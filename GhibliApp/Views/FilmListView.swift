@@ -25,9 +25,19 @@ struct FilmListView: View {
                     Text("Loading Films...")
                 }
                 case .loaded(let films):
-                List(films) {
-                    Text($0.title)
+//                List(films) {
+//                    Text($0.title)
+//                }
+                List(films) { film in
+                    NavigationLink(value: film) {
+//                        Text(film.title)
+                        FilmRow(film: film)
+                    }
                 }
+                .navigationDestination(for: Film.self) { film in
+                        FilmDetailScreen(film: film)
+                }
+                    
                 case .error(let error):
                     Text("Error: \(error)")
                         .foregroundColor(.red)
@@ -55,48 +65,52 @@ struct FilmListView: View {
         
     
 }
-//
-//private struct FilmRow: View {
-//    
-//    let film: Film
+
+private struct FilmRow: View {
+    
+    let film: Film
 //    let favoritesViewModel: FavoritesViewModel
-//    
-//    var body: some View {
-//        HStack(alignment: .top) {
-//            FilmImageView(urlPath: film.image)
-//                .frame(width: 100, height: 150)
-//            
-//            VStack(alignment: .leading) {
-//                HStack {
-//                    Text(film.title)
-//                        .bold()
-//                    
-//                    Spacer()
+    
+    var body: some View {
+        HStack(alignment: .top) {
+            FilmImageView(urlPath: film.image)
+                .frame(width: 100, height: 150)
+            
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(film.title)
+                        .bold()
+                    
+                    Spacer()
 //                    FavoriteButton(filmID: film.id,
 //                                   favoritesViewModel: favoritesViewModel)
-//                    .buttonStyle(.plain)
-//                    .controlSize(.large)
-//                }
-//                .padding(.bottom, 5)
-//                
-//                Text("Directed by \(film.director)")
-//                    .font(.subheadline)
-//                    .foregroundColor(.secondary)
-//                
-//                Text("Released: \(film.releaseYear)")
-//                    .font(.caption)
-//                    .foregroundColor(.secondary)
-//            }
-//            .padding(.top)
-//        }
-//    }
-//}
-//
-//
+                    .buttonStyle(.plain)
+                    .controlSize(.large)
+                }
+                .padding(.bottom, 5)
+                
+                Text("Directed by \(film.director)")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                
+                Text("Released: \(film.releaseYear)")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+            .padding(.top)
+        }
+    }
+}
+
+
 //
 //#Preview {
 //
-//    //@State @Previewable var filmsViewModel = FilmsViewModel(service: MockGhibliService())
+//    @State @Previewable var vm = FilmsViewModel(service: MockGhibliService())
+//    
+//    FilmListView(filmsViewModel: vm)
+//        
+    
 //    @State @Previewable var favorites = FavoritesViewModel(service: MockFavoriteStorage())
 //    
 //    NavigationStack {
@@ -107,8 +121,8 @@ struct FilmListView: View {
 //        favorites.load()
 //    }
 //}
-//
-//
+
+
 
 #Preview {
     FilmListView()

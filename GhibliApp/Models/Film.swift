@@ -55,24 +55,26 @@ struct  Film: Codable, Identifiable, Equatable, Hashable {
     
     //MARK: - Preview
     
-//    @MainActor
-//    static var example: Film {
-//        //MockGhibliService().fetchFilm()
-//        let bannerULR = URL.convertAssetImage(named: "bannerImage")
-//        let posterULR = URL.convertAssetImage(named: "posterImage")
-//        
-//       return Film(id: "id",
-//                   title: "My Neighbor Totoro",
-//                   description: "Two sisters encounter friendly forest spirits in rural Japan.",
-//                   director: "Hayao Miyazaki",
-//                   producer: "Toru Hara",
-//                   releaseYear: "1988",
-//                   score: "93",
-//                   duration: "86",
+    @MainActor
+    static var example: Film {
+        MockGhibliService().fetchFilm()
+        let bannerULR = URL.convertAssetImage(named: "bannerImage")
+        let posterULR = URL.convertAssetImage(named: "posterImage")
+        
+       return Film(id: "id",
+                   title: "My Neighbor Totoro",
+                   description: "Two sisters encounter friendly forest spirits in rural Japan.",
+                   director: "Hayao Miyazaki",
+                   producer: "Toru Hara",
+                   releaseYear: "1988",
+                   score: "93",
+                   duration: "86",
+                   image: "https://ghibliapi.vercel.app/images/totoro-poster.jpg",
+                     bannerImage: "https://ghibliapi.vercel.app/images/totoro-banner.jpg",
 //                   image: posterULR?.absoluteString ?? "",
 //                   bannerImage: bannerULR?.absoluteString ?? "",
-//                   people: ["https://ghibliapi.vercel.app/people/598f7048-74ff-41e0-92ef-87dc1ad980a9"])
-//    }
+                   people: ["https://ghibliapi.vercel.app/people/598f7048-74ff-41e0-92ef-87dc1ad980a9"])
+    }
     
 //    @MainActor
 //    static var exampleFavorite: Film {

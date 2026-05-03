@@ -49,7 +49,7 @@ class FilmsViewModel {
     }
 //    
 //    
-//// MARK: - Preview
+// MARK: - Preview
 //    
 //    static var example: FilmsViewModel {
 //        let vm = FilmsViewModel(service: MockGhibliService())
